@@ -23,7 +23,15 @@ AppConfiguration = [
 Plugins.loadPlugins()
 
 const server = http.createServer(app)
-mongoose.connect("mongodb://localhost:27017/test", { useNewUrlParser: true })
+/**
+ * connect with mongo
+ */
+let mongo_uri:string = ""
+if(config.mongo.username && config.mongo.password){
+   mongo_uri = `${config.mongo.username}:${config.mongo.password}@`
+}
+mongo_uri = `mongodb://${mongo_uri}${config.mongo.host}:${config.mongo.port}/${config.mongo.database}`
+mongoose.connect(mongo_uri, { useNewUrlParser: true })
 server.listen(config.app.port)
 server.on("listening", async () => {
   console.log(AppConfiguration)
