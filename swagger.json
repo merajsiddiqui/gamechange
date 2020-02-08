@@ -1,0 +1,199 @@
+{
+	"basePath": "/",
+	"consumes": [
+		"application/json"
+	],
+	"definitions": {
+		"ErrorResponse": {
+			"properties": {
+				"code": {
+					"type": "string"
+				},
+				"message": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"code",
+				"message"
+			],
+			"type": "object",
+			"additionalProperties": true
+		},
+		"User.createUser": {
+			"properties": {
+				"username": {
+					"type": "string"
+				},
+				"password": {
+					"type": "string"
+				},
+				"firstName": {
+					"type": "string"
+				},
+				"lastName": {
+					"type": "string"
+				},
+				"mobile": {
+					"type": "number",
+					"format": "double"
+				},
+				"isActive": {
+					"type": "boolean"
+				}
+			},
+			"required": [
+				"username",
+				"password",
+				"firstName",
+				"lastName",
+				"mobile",
+				"isActive"
+			],
+			"type": "object",
+			"additionalProperties": true
+		},
+		"User.loginUser": {
+			"properties": {
+				"username": {
+					"type": "string"
+				},
+				"password": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"username",
+				"password"
+			],
+			"type": "object",
+			"additionalProperties": true
+		}
+	},
+	"info": {
+		"title": "gamechange",
+		"version": "1.0.0",
+		"description": "Game Channge API",
+		"license": {
+			"name": "ISC"
+		}
+	},
+	"paths": {
+		"/users/create": {
+			"post": {
+				"operationId": "CreateNewUser",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Created",
+						"schema": {
+							"properties": {
+								"message": {
+									"additionalProperties": true,
+									"type": "object"
+								}
+							},
+							"required": [
+								"message"
+							],
+							"type": "object"
+						}
+					},
+					"400": {
+						"description": "Attribute Missing from user body",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					},
+					"404": {
+						"description": "Not Found",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					},
+					"Unexpected error": {
+						"description": "",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "userObject",
+						"required": true,
+						"schema": {
+							"items": {
+								"$ref": "#/definitions/User.createUser"
+							},
+							"type": "array"
+						}
+					}
+				]
+			}
+		},
+		"/users/login": {
+			"post": {
+				"operationId": "LoginUser",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Created",
+						"schema": {
+							"properties": {
+								"message": {
+									"additionalProperties": true,
+									"type": "object"
+								}
+							},
+							"required": [
+								"message"
+							],
+							"type": "object"
+						}
+					},
+					"400": {
+						"description": "Attribute Missing from user body",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					},
+					"404": {
+						"description": "Not Found",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					},
+					"Unexpected error": {
+						"description": "",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "loginObject",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/User.loginUser"
+						}
+					}
+				]
+			}
+		}
+	},
+	"produces": [
+		"application/json"
+	],
+	"swagger": "2.0",
+	"securityDefinitions": {}
+}

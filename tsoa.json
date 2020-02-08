@@ -1,0 +1,14 @@
+{
+    "swagger" : {
+        "outputDirectory" : ".",
+        "entryFile": "./src/app.ts"
+    },
+    "routes" : {
+        "basePath" : "/",
+        "entryFile": "./src/app.ts",
+        "routesDir": "./src/routes/"
+    },
+    "ignore": [
+        "**/node_modules/**"
+      ]
+}

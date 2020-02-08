@@ -1,0 +1,3 @@
+class Log {}
+
+export { Log }
